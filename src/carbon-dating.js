@@ -29,7 +29,7 @@ function dateSample(/* sampleActivity */) {
   const num1 = 0.693 / HALF_LIFE_PERIOD;
   const num2 = Math.log(MODERN_ACTIVITY / sampleActivity);
 
-  return Math.ceil(num2 / num1);
+  return Math.ceil(num2 / num1);``
 }
 
 module.exports = {
