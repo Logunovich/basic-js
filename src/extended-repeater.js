@@ -16,36 +16,41 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function repeater(str, options) {
-    const strTemp = str
-    const adArr = []
-    const resultArr = []
-    if(options.hasOwnProperty('addition')){
-        if(options.hasOwnProperty('additionRepeatTimes')){
-            for(let i = 0; i < options.additionRepeatTimes; i++){
-              adArr.push(String(options.adArr))
-            }
-        }else{
-          adArr.push(String(options.adArr))
-        }
-    }
-    if(options.hasOwnProperty('additionSeparator')){
-      adArr = adArr.join(options.additionSeparator)
-    }else{
-      adArr = adArr.join('|')
-    }
-    strTemp += adArr
-    if(!options.hasOwnProperty('repeatTimes')){
-      resultArr.push(strTemp)
-    }else{
-      for(let i = 0; i < options.repeatTimes; i++){
-        resultArr.push(strTemp)
+  const arr = [];
+  const num = 0
+  if (Number.isInteger(options.additionRepeatTimes)) {
+
+    while (num < options.additionRepeatTimes) {
+      if (options.addition === null || options.addition === false) {
+        arr.push(String(options.addition))
+      } else {
+        arr.push(options.addition)
       }
+      num++
     }
-    
-    if(options.hasOwnProperty('separator')){
-        return resultArr.join(options.separator)
+
+  } else {
+    if (options.addition === null || options.addition === false) {
+      arr.push(String(options.addition))
+    } else {
+      arr.push(options.addition)
     }
-    return resultArr.join('+')
+  }
+  let string = '';
+  (options.additionSeparator) ? string = `${String(str)}${arr.join(options.additionSeparator)}` : string = `${String(str)}${arr.join('|')}`;
+  let arr1 = [];
+  let j = 0;
+  if (Number.isInteger(options.repeatTimes)) {
+    while (j < options.repeatTimes) {
+      arr1.push(string)
+      j++
+    }
+  } else {
+    arr1.push(string)
+  }
+  let result = '';
+  (options.separator) ? result = arr1.join(options.separator) : result = arr1.join('+');
+  return result
 }
 
 module.exports = {
